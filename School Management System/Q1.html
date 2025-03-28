@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Management System</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        body{background-color: #f4ebeb;}
+        header{background-color:rgb(133, 133, 212);
+                    height:40px;
+                    width:100%;
+                    text-align:center;
+                    color:white; 
+                    padding:20px;} 
+        label{display:block;
+              margin-bottom:10px;} 
+        form{
+            margin:50px auto;
+            width:500px;
+            border:1px solid #f4ebeb;
+            background-color: white;
+            padding:20px;
+            font-size: large; border-radius: round;
+        }
+        .error{color:red;font-size: 15px;}
+        button{width:100%;
+        background-color: rgb(174, 174, 205);}
+        button:hover{background-color: lightblue;}
+    </style>
+</head>
+<body>
+    <header>
+       <h2>School Management System</h2>
+    </header>
+    <marquee behaviour="scroll"direction="left"scrollamount="6">
+       Welcome to the virtual tour of our school. Please enter your details to login.
+    </marquee>
+    <form id="login">
+        <h2>Login</h2>
+        <label>Username</label>
+        <input type="text"id="name"placeholder="name"required><br><br>
+        <label>Password</label>
+        <input type="password"id="password"placeholder="********"required><br>
+        <span class="error" id="errorMsg"></span><br><br>
+        <a href="Q2.html"><button>Login</button></a>
+    </form>
+    <script>
+        document.getElementById("login").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      var enteredUsername = document.getElementById("name").value;
+      var enteredPassword = document.getElementById("password").value;
+      
+      var registeredUsername = localStorage.getItem('registeredUsername');
+      var registeredPassword = localStorage.getItem('registeredPassword');
+          
+      if (enteredUsername === registeredUsername && enteredPassword === registeredPassword) {
+        window.location.href = "Q2.html"; 
+      } else {
+        document.getElementById("errorMsg").textContent = "Invalid username or password.";
+      }
+    });
+    </script>
+</body>
+</html>

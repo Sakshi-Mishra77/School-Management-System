@@ -1,0 +1,137 @@
+<!--includes Q2 & Q3-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Info</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <style>
+        body{background-color: #f4ebeb;}
+        h1{background-color:rgb(133, 133, 212);
+                    height:80px;
+                    width:100%;
+                    text-align:center;
+                    color:white; 
+                    padding:20px;} 
+        #student-table{background-color: white;
+            margin:50px auto;
+            border:1px #f4ebeb;
+            width:80%;}
+         thead{background-color:rgb(133, 133, 212);
+            height:40px;
+            padding:20px;
+            color:white;}
+         th,td{padding: 10px;}
+         #btn1{background-color: rgb(123, 123, 167);
+              color:white;border:none;padding:5px;}
+         #btn2{background-color: rgb(238, 41, 41);
+              color:white;border:none;padding:5px;}
+         .add-btn{background-color: rgb(81, 137, 137);
+               color:white;border:none;padding:5px;margin-left: 50px;}
+        #btn1:hover{background-color: rgb(135, 180, 197);}#btn2:hover{background-color: rgb(192, 151, 151);}
+        div{margin-top: 50px;
+             margin-left:20px ;}
+        .add-btn:hover{background-color: rgb(212, 180, 140);}
+        tr:hover{background-color: burlywood;}
+    </style>
+</head>
+<body>
+    <h1>Student Information</h1>
+    <nav class="container my-4">
+    <div class="d-flex justify-content-center">
+            <div><a href="Q1.html">
+            <button class="btn btn-outline-info mx-2">Home</button></a></div>
+            <div><button class="btn btn-outline-primary mx-2">Admission</button></div>
+            <div class="dropdown mx-2">
+                <button class="btn btn-outline-success dropdown-toggle" type="button" id="achievementsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    Achievements
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="achievementsDropdown">
+                    <li><a class="dropdown-item" href="Q4.html">Gallery</a></li>
+                    <li><a class="dropdown-item" href="Q4.html #gallery-section"onclick="goToSlide(2)">Achievement 1</a></li>
+                    <li><a class="dropdown-item" href="Q4.html #gallery-section"onclick="goToSlide(3)">Achievement 2</a></li>
+                </ul>
+            </div><div>
+            <a href="Q5.html">
+            <button class="btn btn-outline-secondary mx-2">Alumni on Focus</button></a></div>
+        </div></nav>
+    <div>
+        <label>Search by Name:</label>
+        <input type="text" id="search" placeholder="Type a name...">
+    </div>
+    <table id="student-table">
+        <thead> <tr>
+            <th>Name</th><th>Age</th><th>Semester</th><th>Registration No.</th><th>Actions</th></tr></thead>
+        <tbody><tr>
+            <td>Robin Sharma</td><td>20</td><td>3rd</td> <td>12345611</td>
+            <td><button id="btn1">Edit</button>
+                <button id="btn2">Delete</button></td></tr>
+        <tr style="background-color: lightgrey;"><td>Khushi Agarwal</td>
+            <td>19</td><td>1st</td><td>12345622</td>
+            <td><button id="btn1">Edit</button>
+                <button id="btn2">Delete</button></td></tr>
+        <tr><td>Vaishali Mitra</td>
+            <td>21</td><td>5th</td><td>12345633</td>
+            <td><button id="btn1">Edit</button>
+                <button id="btn2">Delete</button></td></tr>
+        <tr style="background-color: lightgrey;"><td>Krunal Singh</td>
+            <td>22</td>
+            <td>7th</td>
+            <td>12345677</td>
+            <td><button id="btn1">Edit</button>
+                <button id="btn2">Delete</button></td></tr>
+    </tbody></table>
+    <button class="add-btn" onclick="addStudent()">Add Student</button>
+    <script>
+        function addStudent() {
+        let name = prompt("Enter student name:");
+        let age = prompt("Enter student age:");
+      let semester = prompt("Enter student semester:");
+      let regNumber = prompt("Enter student registration number:");
+      
+      if (name && age && semester && regNumber) {
+        let newRow = `
+          <tr>
+            <td>${name}</td>
+            <td>${age}</td>
+            <td>${semester}</td>
+            <td>${regNumber}</td>
+            <td>
+              <button id="#btn1">Edit</button>
+              <button id="#btn2">Delete</button>
+            </td>
+          </tr>
+        `;
+        $("#student-table tbody").append(newRow);
+      }
+    }
+        document.querySelectorAll('#btn2').forEach(button => {
+        button.addEventListener('click', function() {
+            alert("Are you sure you want to delete");
+            const row = this.closest('tr');
+            row.remove(); 
+        }); });
+         document.querySelectorAll('#btn1').forEach(button => {
+         button.addEventListener('click', function() {
+            const row = this.closest('tr');
+            const cells = row.querySelectorAll('td');
+            let data = [];
+            cells.forEach((cell, index) => {
+                if (index < 4) {
+                    const newValue = prompt(`Edit ${cell.textContent}`, cell.textContent);
+                    if (newValue) cell.textContent = newValue;
+                    data.push(newValue);
+                }  });  }); });
+                //For Question 3
+            $(document).ready(function() {
+             $('#search').on('keyup', function() {
+            const value = $(this).val().toLowerCase();
+            $('#student-table tbody tr').filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+            });})});              
+</script>
+</body>
+</html>
